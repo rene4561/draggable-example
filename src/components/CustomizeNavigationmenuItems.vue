@@ -1,18 +1,14 @@
 <template>
-  <div class="fluid container">
-    <div class="form-group form-group-lg panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Sortable control</h3>
-      </div>
+  <div class="">
+    <div class="">
+        <h3 class="">Sortable control</h3>
       <div class="panel-body">
-        <div class="checkbox">
-          <label><input type="checkbox" v-model="editable">Enable drag and drop</label>
-        </div>
+        <label><input type="checkbox" v-model="editable">Enable drag and drop</label>
         <button type="button" class="btn btn-default" @click="orderList">Sort by original order</button>
       </div>
     </div>
 
-    <div class="col-md-3">
+    <div class="">
       <draggable class="list-group" tag="ul" v-model="list" v-bind="dragOptions" :move="onMove" @start="isDragging=true" @end="isDragging=false">
         <transition-group type="transition" :name="'flip-list'">
           <li class="list-group-item" v-for="element in list" :key="element.order">
@@ -24,7 +20,7 @@
       </draggable>
     </div>
 
-    <div class="col-md-3">
+    <div class="">
       <draggable element="span" v-model="list2" v-bind="dragOptions" :move="onMove">
         <transition-group name="no" class="list-group" tag="ul">
           <li class="list-group-item" v-for="element in list2" :key="element.order">
@@ -36,10 +32,10 @@
       </draggable>
     </div>
 
-    <div class="list-group col-md-3">
+    <div class="list-group">
       <pre>{{listString}}</pre>
     </div>
-    <div class="list-group col-md-3">
+    <div class="list-group">
       <pre>{{list2String}}</pre>
     </div>
   </div>
@@ -138,6 +134,7 @@ export default {
 
 .list-group-item {
   cursor: move;
+  
 }
 
 .list-group-item i {
