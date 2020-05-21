@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <hello></hello>
+    <customize-navigationmenu-items></customize-navigationmenu-items>
   </div>
 </template>
 
 <script>
-import Hello from "./components/Hello";
+import CustomizeNavigationmenuItems from "./components/CustomizeNavigationmenuItems";
 
 export default {
   name: "app",
   components: {
-    Hello
+    CustomizeNavigationmenuItems
   }
 };
 </script>

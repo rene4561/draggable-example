@@ -59,7 +59,7 @@ const message = [
 ];
 
 export default {
-  name: "hello",
+  name: "CustomizeNavigationmenuItems",
   components: {
     draggable
   },
