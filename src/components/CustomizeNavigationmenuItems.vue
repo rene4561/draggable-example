@@ -1,58 +1,47 @@
 <template>
-  <div class="">
+  <div class="menuSettingWrapper">
     <div class="">
-        <h3 class="">Sortable control</h3>
+        <h3 class="">Lav din menustruktur</h3>
       <div class="panel-body">
-        <label><input type="checkbox" v-model="editable">Enable drag and drop</label>
         <button type="button" class="btn btn-default" @click="orderList">Sort by original order</button>
       </div>
     </div>
 
-    <div class="">
-      <draggable class="list-group" tag="ul" v-model="list" v-bind="dragOptions" :move="onMove" @start="isDragging=true" @end="isDragging=false">
+    <div class="menuInactiveListContainer">
+      <draggable class="list-group" tag="ul" v-model="menuPagesInactiveList" v-bind="dragOptions" :move="onMove" @start="isDragging=true" @end="isDragging=false">
         <transition-group type="transition" :name="'flip-list'">
-          <li class="list-group-item" v-for="element in list" :key="element.order">
-            <i :class="element.fixed? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'" @click=" element.fixed=! element.fixed" aria-hidden="true"></i>
+          <li class="list-group-item" v-for="element in menuPagesInactiveList" :key="element.order">
             {{element.name}}
-            <span class="badge">{{element.order}}</span>
           </li>
         </transition-group>
       </draggable>
     </div>
 
     <div class="">
-      <draggable element="span" v-model="list2" v-bind="dragOptions" :move="onMove">
+      <draggable element="span" v-model="menuPagesActiveList" v-bind="dragOptions" :move="onMove">
         <transition-group name="no" class="list-group" tag="ul">
-          <li class="list-group-item" v-for="element in list2" :key="element.order">
-            <i :class="element.fixed? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'" @click=" element.fixed=! element.fixed" aria-hidden="true"></i>
+          <li class="list-group-item" v-for="element in menuPagesActiveList" :key="element.order">
             {{element.name}}
-            <span class="badge">{{element.order}}</span>
           </li>
         </transition-group>
       </draggable>
-    </div>
-
-    <div class="list-group">
-      <pre>{{listString}}</pre>
-    </div>
-    <div class="list-group">
-      <pre>{{list2String}}</pre>
     </div>
   </div>
 </template>
 
 <script>
 import draggable from "vuedraggable";
-const message = [
-  "vue.draggable",
-  "draggable",
-  "component",
-  "for",
-  "vue.js 2.0",
-  "based",
-  "on",
-  "Sortablejs"
+const menuPagesInactiveArray = [
+  "Test",
+  "Datapolitik",
+  "Anmeldelser"
 ];
+const menuPagesActiveArray = [
+  "Forside",
+  "Ydelser",
+  "Om os",
+  "Kontakt os"
+  ]
 
 export default {
   name: "CustomizeNavigationmenuItems",
@@ -61,10 +50,12 @@ export default {
   },
   data() {
     return {
-      list: message.map((name, index) => {
+      menuPagesInactiveList: menuPagesInactiveArray.map((name, index) => {
         return { name, order: index + 1, fixed: false };
       }),
-      list2: [],
+      menuPagesActiveList: menuPagesActiveArray.map((name, index) => {
+        return { name, order: index + 1, fixed: false };
+      }),
       editable: true,
       isDragging: false,
       delayedDragging: false
@@ -72,7 +63,7 @@ export default {
   },
   methods: {
     orderList() {
-      this.list = this.list.sort((one, two) => {
+      this.menuPagesInactiveList = this.menuPagesInactiveList.sort((one, two) => {
         return one.order - two.order;
       });
     },
@@ -93,12 +84,6 @@ export default {
         ghostClass: "ghost"
       };
     },
-    listString() {
-      return JSON.stringify(this.list, null, 2);
-    },
-    list2String() {
-      return JSON.stringify(this.list2, null, 2);
-    }
   },
   watch: {
     isDragging(newValue) {
@@ -114,7 +99,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+
 .flip-list-move {
   transition: transform 0.5s;
 }
@@ -125,7 +111,7 @@ export default {
 
 .ghost {
   opacity: 0.5;
-  background: #c8ebfb;
+  background: darkblue;
 }
 
 .list-group {
@@ -140,4 +126,5 @@ export default {
 .list-group-item i {
   cursor: pointer;
 }
+
 </style>

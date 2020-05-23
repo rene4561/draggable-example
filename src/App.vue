@@ -66,6 +66,6 @@ main {
   margin: 0 auto;
   max-width: 700px;
   padding: 35px 0;
-      padding-left: 50px;
+  padding-left: 50px;
 }
 </style>
